@@ -100,4 +100,21 @@ nav ul li a {
 .learn{
     height: 100vh;
     background-color: #EEFFFD;
+    /* display: flex; */
+}
+
+.more{
+    width: 400px;
+    height: 500px;
+  
+    position: absolute;
+    display: flex;
+    margin-top: -500px;
+    margin-left: 750px;
+
+    justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+}
+.photo{
+    margin-left: 200px;
 }
