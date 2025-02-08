@@ -1,1 +1,1 @@
-# Project
+Project - Personal Finance Tracker
