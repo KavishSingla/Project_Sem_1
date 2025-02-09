@@ -98,7 +98,7 @@ nav ul li a {
     margin-top: 10px;
 }
 .learn{
-    height: 100vh;
+    height: 180vh;
     background-color: #EEFFFD;
     /* display: flex; */
 }
@@ -110,11 +110,66 @@ nav ul li a {
     position: absolute;
     display: flex;
     margin-top: -500px;
-    margin-left: 750px;
+    margin-left: 800px;
 
     justify-content: center; /* Horizontal centering */
   align-items: center; /* Vertical centering */
 }
 .photo{
-    margin-left: 200px;
+    margin-left: 250px;
+}
+
+.track{
+    width: 400px;
+    height: 500px;
+  
+    position: absolute;
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    margin-left: 300px;
+}
+
+.photo2{
+    margin-left: 850px;
+}
+
+/* .footer{
+    height: 40vh;
+    background-color: gainsboro;
+} */
+
+
+.footer {
+    /* background: #fff; */
+    background-color: ghostwhite;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0px -3px 10px rgba(0, 0, 0, 0.1);
+    height: 30vh;
+    /* font-size: 32px; */
+}
+.footer a {
+    color: #666;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 18px;
+}
+.footer a:hover {
+    text-decoration: underline;
+}
+.footer p {
+    color: #666;
+    font-size: 20px;
+    margin-top: 10px;
+}
+.divider {
+    width: 80%;
+    margin: 10px auto;
+    border-top: 1px solid #ccc;
+}
+
+.member{
+    line-height: 0.5;
+    margin-left: 30px;
 }
