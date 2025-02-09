@@ -171,5 +171,14 @@ nav ul li a {
 
 .member{
     line-height: 0.5;
-    margin-left: 30px;
+  
+  
+
+   
+}
+.icons{
+     display: inline-block;
+   
+     margin-top: 20px; 
+    
 }
