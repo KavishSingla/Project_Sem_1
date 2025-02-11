@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Section</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body class="bg-gradient-to-r from-blue-900 to-purple-900 text-white">
+    <footer class="py-10">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Xtyle</h2>
+                <p>Subscribe Easy Tutorials Youtube channel to watch more videos on website development and Press the bell icon to get immediate notification of latest videos.</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-4">Office</h3>
+                <p>ITPL Road<br>Whitefield, Bangalore<br>Karnataka, PIN 560066,<br>India</p>
+                <p class="mt-2"><a href="mailto:avinashdm@outlook.com" class="text-white">avinashdm@outlook.com</a></p>
+                <p class="mt-2">+91 - 0123456789</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-4">Links</h3>
+                <ul>
+                    <li class="mb-2"><a href="#" class="text-white">Home</a></li>
+                    <li class="mb-2"><a href="#" class="text-white">Services</a></li>
+                    <li class="mb-2"><a href="#" class="text-white">About Us</a></li>
+                    <li class="mb-2"><a href="#" class="text-white">Features</a></li>
+                    <li class="mb-2"><a href="#" class="text-white">Contacts</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+                <div class="flex items-center border-b border-gray-400 py-2">
+                    <i class="fas fa-envelope mr-2"></i>
+                    <input class="appearance-none bg-transparent border-none w-full text-white mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Enter your email id" aria-label="Email">
+                    <button class="flex-shrink-0 text-white border-transparent border-4 hover:text-gray-400">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="flex mt-4 space-x-4">
+                    <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-400 mt-8"></div>
+        <div class="text-center mt-4">
+            <p>Easy Tutorials © 2021 - All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>
