@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .header {
+            background-color: #120c5f;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .background-container {
+            background-color: #120c5f;
+            position: relative;
+            padding: 40px 20px;
+        }
+
+        .background-design {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cpath d='M0 50 Q 25 25, 50 50 T 100 50 T 150 50' stroke='rgba(255,255,255,0.1)' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+            background-size: 200px 100px;
+        }
+
+        .content-wrapper {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .converter-title {
+            color: white;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .converter-subtitle {
+            color: #a0a0a0;
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        .converter-layout {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .container {
+            width: 100%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+        }
+        
+         .estimated-saving-balance {
+            width: 60%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        } 
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #120c5f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .info-section, .faq-section, .testimonials, .conversion-table {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            background-color: #120c5f;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+   
+        .footer-copyright {
+            background-color: black;
+            padding: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .converter-layout, .tools-container {
+                flex-direction: column;
+            }
+            .container, .estimated-saving-balance, .tool-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+        
+    </header>
+
+    <section class="background-container">
+        <div class="background-design"></div>
+        <div class="content-wrapper">
+            <h1 class="converter-title">Savings Calculator</h1>
+            <p class="converter-subtitle"><b>Find out how much you can grow your savings and how long it'll take.</b></p>
+
+            <div class="converter-layout">
+                <div class="container">
+                    <div class="input-group">
+                        <label for="amount">How much is your initial deposite ?</label>
+                        <input type="number" id="amount" placeholder="0" />
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount">Monthly savings contribution</label>
+                        <input type="number" id="amount" placeholder="0" />
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount">How long do you plan to save ?</label>
+                        <input type="number" id="amount" placeholder="0" />
+                    </div>
+
+                    <div class="input-group">
+                        <label for="amount">Estimated interest rate</label>
+                        <input type="number" id="amount" placeholder="0" />
+                    </div>
+                    <h3 style="font-family:'Times New Roman', Times, serif;">Estimate your savings goal</h3>
+                    <div id="result" style="margin-top: 20px; font-size: 1.2rem"></div>
+                    
+                    
+                    <button onclick="Recalculate()">Re-calculate</button>
+                    <div id="result" style="margin-top: 20px; font-size: 1.2rem; color: #120c5f;"></div>
+                </div>
+
+                <div class="estimated-saving-balance">
+                    <h2 style="font-size: 35px;">Your estimated saving balance</h2>
+                    <div class="rate-item">
+                        <span class="rate-currency" style="font-size: 35px;">$0</span>
+                    </div>
+                    <h3 style="font-size: 25px;">Total Interest Earned</h3>
+                    <div class="rate-item">
+                        <span class="rate-currency" style="font-size: 25px;">$0</span>
+                    </div>
+                    <h3 style="font-size: 25px">Total Principle Invested</h3>
+                    <div class="rate-item">
+                        <span class="rate-currency" style="font-size: 25px;">$0</span>
+                    </div>
+                    <button style="height:50px;width: 250px;margin-left:60px;">Start Saving</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    
+
+    <section class="info-section">
+        <h2>How to use Credit savings calculator</h2>
+        <p>Building up your savings can be a good way to help you get closer to your financial goals. You can use a savings account to put aside cash for a rainy day, save for a big expense or even help cover an emergency.
+            
+            But how quickly you can grow your savings may depend on a few key factors, including the following:
+            
+            Starting amount
+            Monthly savings contribution
+            Years to save
+            Estimated interest rate
+            Savings goal
+            Our savings calculator is for simple interest accounts and can help you estimate how long it might take to meet your savings goal. But keep in mind that this calculator provides an estimate only, based on the information you provide. It doesn’t consider other factors — like the type of savings account, interest rates, fees and bank policies.</p>
+    </section>
+
+    <section class="faq-section">
+        <h2>Starting amount</h2>
+        Enter the amount you’ll initially put into your savings account. Remember that the more money your savings account starts off with, the quicker you may be able to watch your savings grow.
+    </section>
+
+    <section class="testimonials">
+        <h2>Monthly savings contribution</h2>
+            <p>"Plug in the amount of money you can realistically add to your savings account each month. The more you put aside on a monthly basis, the more you may be able to save over time."</p>
+    </section>
+
+    <footer>
+        <div class="footer-copyright">
+            &copy; 2025 savings calculator. All rights reserved.
+        </div>
+    </footer>
+
+    <script></script>
+   
+</body>
+</html>

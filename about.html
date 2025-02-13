@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+
+
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container-column {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .image-container {
+            position: relative;
+            margin-top: 5vh;
+            width: 100vw;
+            height: 80vh;
+        }
+
+        .back_img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .image-container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(127, 255, 212, 0.5), rgba(32, 178, 170, 0.5));
+        }
+
+        .over-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 5rem;
+            font-family: sans-serif;
+            font-weight: bold;
+            text-align: center;
+            z-index: 10;
+            width: 80%;
+        }
+
+        .container1 {
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+            flex-direction: column;
+            /* max-width: 650px; */
+            background-color: #F5F5F5;
+            box-sizing: border-box;
+            height: 250px;
+        }
+
+        .box1 {
+            max-width: 650px;
+            padding: 0 300px;
+        }
+
+        .box {
+            width: 120px;
+            text-align: center;
+        }
+
+        .box img {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 10px;
+        }
+
+        .container2 {
+            display: flex;
+            gap: 100px;
+            justify-content: center;
+            /* align-items: center; */
+            align-content: center;
+            /* max-width: 1000px; */
+            /* margin-left: 300px; */
+            width: 800px;
+            flex-wrap: wrap;
+        }
+
+        .box span {
+            display: block;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .about-box {
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+            flex-direction: column;
+            background-color: darkseagreen;
+            box-sizing: border-box;
+        }
+
+        .about-img {
+            margin-top: -600px;
+            margin-left: 800px;
+            margin-bottom: 100px;
+        }
+
+        .team-section {
+            text-align: center;
+            padding: 50px;
+            background-color: #f8f9fa;
+        }
+
+        .team-heading {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            position: relative;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .team-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            display: block;
+        }
+
+        .team-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .team-role {
+            color: #777;
+            font-size: 1rem;
+        }
+
+        .team-card:hover .team-role {
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="./images/about_back.jpg" alt="background" class="back_img">
+            <h1 class="over-text">Championing financial progress for all.</h1>
+        </div>
+    </div>
+
+    <div class="container1">
+        <br>
+        <div class="box1">
+            <h2>We put our 130+ million members at the center.</h2>
+
+            <p>Making progress is hard work. That’s why we believe in a world where technology and data can help make
+                finances easier for everyone. It’s our mission to empower each and every one of our members with the
+                knowledge, tips and tools they need to turn their financial dreams into a reality.</p>
+        </div>
+    </div>
+    <br><br>
+    <div style="text-align: center;" class="container-column">
+        <h1>We build tools for every step of your financial journey.</h1>
+
+        <br><br><br>
+
+        <div class="container2">
+            <div class="box"><img src="./logos/Icon_Credit-1.png" alt=""><span>Credits</span></div>
+            <div class="box"><img src="/logos/Icon_Cards.png" alt=""><span>Cards</span></div>
+            <div class="box"><img src="/logos/Icon_Loans.webp" alt=""><span>Loans</span></div>
+            <div class="box"><img src="/logos/Icon_Tax-1.png" alt=""><span>Tax</span></div>
+
+            <div class="box"><img src="/logos/Icon_Savings.png" alt=""><span>Money</span></div>
+            <div class="box"><img src="/logos/Icon_Auto.png" alt=""><span>Auto</span></div>
+            <div class="box"><img src="/logos/Icon_Housing.png" alt=""><span>Home</span></div>
+            <div class="box"><img src="/logos/Icon_Accounts.png" alt=""><span>Accounts</span></div>
+        </div>
+    </div>
+
+    <br><br><br><br><br>
+    <div class="about-box">
+        <div class="box1">
+            <h1>About BudgetBee</h1>
+            <p>At <b>BudgetBee,</b> we believe that managing personal finances should be effortless and empowering. Our
+                smart finance tracker is designed to help you take control of your money, track your expenses, set
+                budgets, and achieve your financial goals—all in one place.
+
+            <h2>Why BudgetBee?</h2>
+            We know that financial planning can be overwhelming, but with BudgetBee’s intuitive tools, you can visualize
+            your spending, monitor savings, and make informed financial decisions with ease. Whether you’re a student, a
+            working professional, or managing a household, our platform adapts to your needs.
+
+            <h2>Smart, Simple & Secure</h2>
+            Security and simplicity are at the heart of BudgetBee. Your data is protected with bank-level encryption,
+            and our user-friendly interface ensures that budgeting becomes a habit—not a hassle. With insightful
+            analytics, reminders, and custom financial goals, BudgetBee helps you spend wisely and save smarter.
+
+            <h2>Join the BudgetBee Community</h2>
+            Take the first step toward financial freedom today! Join thousands of users who trust BudgetBee to track
+            their expenses, cut unnecessary costs, and build a stable financial future. Because when it comes to money,
+            every small step counts.</p>
+
+
+            <img src="./images/businessman-with-big-dollar-sign_1133-338.avif" style="width: 300px; height: 330px;"
+                class="about-img" alt="">
+        </div>
+    </div>
+
+
+    <div class="team-section">
+        <h2 class="team-heading">Meet Our Team</h2>
+        <br>
+        <div class="team-container">
+            <div class="team-card">
+                <img src="https://via.placeholder.com/100" alt="Team Member" class="team-img">
+                <p class="team-name">Devansh Kapoor</p>
+                <p class="team-role">CEO & Founder</p>
+            </div>
+
+            <div class="team-card">
+                <img src="https://via.placeholder.com/100" alt="Team Member" class="team-img">
+                <p class="team-name">Kavish Singla</p>
+                <p class="team-role">Lead Developer</p>
+            </div>
+
+            <div class="team-card">
+                <img src="https://via.placeholder.com/100" alt="Team Member" class="team-img">
+                <p class="team-name">Ishani Garg</p>
+                <p class="team-role">UI/UX Designer</p>
+            </div>
+
+            <div class="team-card">
+                <img src="https://via.placeholder.com/100" alt="Team Member" class="team-img">
+                <p class="team-name">Kartikey Yadav</p>
+                <p class="team-role">Marketing Head</p>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
