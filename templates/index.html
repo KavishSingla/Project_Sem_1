@@ -228,33 +228,64 @@ nav ul li a {
                   </div>
 
                 <li><a href="#">Credit Cards</a></li>
-                <li><a href="#">Loans</a></li>
+                <li><a href="{{url_for('calculator')}}">Calculators</a></li>
 
                 <div class="dropdown ">
                     <button style="border: none;background-color: white;" class="dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Resources
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Support</a></li>
-                      <li><a class="dropdown-item" href="#">Net Worth</a></li>
+                      <li><a class="dropdown-item" href="{{url_for('networth')}}">Net Worth</a></li>
+                      <li><a class="dropdown-item" href="{{url_for('contact')}}">Contact Us</a></li>
                      
                     </ul>
                   </div>
                 
             </ul>
         </nav>
+        {#
+        {% if current_user.is_authenticated %}
+
+
         <div class="auth-buttons sign">
-            <!-- <button class="btn-outline ">Sign up</button> -->
-            <a href="#" class="btn" style="border: 2px solid;">Sign up</a>
+            
+            <a href="#" class="btn" style="border: 2px solid;">Profile</a>
 
           
-                
-                
-
-            <a href="#" class="btn" style="border: 2px solid;">   <span class="material-symbols-outlined" style="font-size: 20px; ">lock</span> Sign In</a>
+            <a href="{{url_for('logout')}}" class="btn" style="border: 2px solid;">   <span class="material-symbols-outlined" style="font-size: 20px; ">lock</span> Logout</a>
+        
             
         </div>
+
+        {% else %}
+        <div class="auth-buttons sign">
+            
+            <a href="{{url_for('register')}}" class="btn" style="border: 2px solid;">Sign up</a>
+
+          
+            <a href="{{url_for('login')}}" class="btn" style="border: 2px solid;">   <span class="material-symbols-outlined" style="font-size: 20px; ">lock</span> Sign In</a>
+        
+            
+        </div>
+        
+        {% endif %}
+
+        #}
+
+        <div class="auth-buttons sign">
+            
+            <a href="{{url_for('register')}}" class="btn" style="border: 2px solid;">Sign up</a>
+
+          
+            <a href="{{url_for('login')}}" class="btn" style="border: 2px solid;">   <span class="material-symbols-outlined" style="font-size: 20px; ">lock</span> Sign In</a>
+        
+            
+        </div>
+
     </header>
+                
+
+            
 
    
     <!-- Hero Section -->
@@ -262,7 +293,8 @@ nav ul li a {
         <div class="hero-content">
             <h1> <strong>Mint has been reimagined on</strong> <span class="highlight">Credit Karma.</span></h1>
             <p>Reviewing transactions, monitoring your spending and tracking your net worth now have a new home.</p>
-            <button class="btn-success btn">Check it out</button>
+            <a href="{{url_for('check_it_out')}}" class="btn-success btn" >Check it out</a>
+            
         </div>
         <div class="hero-image">
             <img src="../images/person2.png" alt="User Holding Phone">
@@ -354,10 +386,10 @@ nav ul li a {
                     <h3 class="text-xl font-bold mb-4">Links</h3>
                     <ul>
                         <li class="mb-2"><a href="#" class="text-white">Home</a></li>
-                        <li class="mb-2"><a href="#" class="text-white">Services</a></li>
-                        <li class="mb-2"><a href="#" class="text-white">About Us</a></li>
+                        <li class="mb-2"><a href="{{url_for('calculator')}}" class="text-white">Services</a></li>
+                        <li class="mb-2"><a href="{{url_for('aboutus')}}" class="text-white">About Us</a></li>
                         <li class="mb-2"><a href="#" class="text-white">Features</a></li>
-                        <li class="mb-2"><a href="#" class="text-white">Contacts</a></li>
+                        <li class="mb-2"><a href="{{url_for('contact')}}" class="text-white">Contacts</a></li>
                     </ul>
                 </div>
                 <div>

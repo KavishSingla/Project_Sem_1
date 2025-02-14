@@ -101,13 +101,35 @@
                 border-bottom: 2px solid black;
             }
         }
+
+
+        .msg{
+            margin-top: -700px;
+            position: absolute;
+            
+        }
+
     </style>
 </head>
 <body>
+
+<div class="msg">
+    {% for category,messages in get_flashed_messages(with_categories=True) %}
+
+        <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+            {{messages}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+    {% endfor %}
+
+</div>
+
+
     <div class="container">
         <div class="box1">
             <h2 class="mb-4">Log In to your existing Account</h2> <br><br>
-            <form>
+            <form action="{{url_for('login')}}" method="POST" >
                 <div class="form-group">
                     <label for="name">Full Name</label>
                     <input type="text" class="form-control" id="name" placeholder="Enter your name">
@@ -121,8 +143,11 @@
                     <input type="password" class="form-control" id="password" placeholder="Enter password">
                 </div>
                
+                
             
                 <button type="submit" class="btn btn-primary w-100 mt-3">Log in</button>
+
+                <p>New User? <a href="{{ url_for('register') }}">Register first</a></p>
             </form>
         </div>
         <div class="box2"></div>
