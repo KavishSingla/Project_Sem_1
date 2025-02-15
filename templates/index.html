@@ -212,6 +212,12 @@ nav ul li a {
     
 }
 
+.logout-msg{
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 600px;
+}
+
 
 
        </style>
@@ -264,7 +270,7 @@ nav ul li a {
             <a href="{{url_for('profile')}}" class="btn" style="border: 2px solid;">  Profile</a>
 
           
-            <a href="{{url_for('logout')}}" class="btn" style="border: 2px solid;">  Logout</a>
+            <a href="{{url_for('logout')}}" class="btn" style="border: 2px solid;" onclick="return confirm('Are you sure to logout')">  Logout</a>
         
             
         </div>
@@ -283,7 +289,21 @@ nav ul li a {
         {% endif %}
 
     </header>
-                
+    
+    <div class="logout-msg">
+        
+
+        {% for category,messages in get_flashed_messages(with_categories=True) %}
+    
+        <div id="alertBox" class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+            {{messages}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    
+        {% endfor %}
+
+
+    </div>
 
             
 
@@ -418,7 +438,17 @@ nav ul li a {
         </div>
 
 
-
+        <script>
+        
+            setTimeout(function () {
+                let alertBox = document.getElementById("alertBox");
+                if (alertBox) {
+                    alertBox.classList.remove("show");
+                    alertBox.classList.add("fade");
+                    setTimeout(() => alertBox.remove(), 500); 
+                }
+            }, 2000);
+        </script>
 
 
 
