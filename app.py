@@ -4,6 +4,7 @@ import os
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask_bcrypt import Bcrypt
 from functools import wraps
+import re
 
 
 
@@ -42,10 +43,12 @@ class User(db.Model, UserMixin):
     
 
     def set_password(self, password):
-        self.password_hash = bcrypt.generate_password_hash(password)
+        self.password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
 
     def check_password(self, password):
         return bcrypt.check_password_hash(self.password_hash, password)
+    
+
     
     
 @login_manager.user_loader
@@ -82,6 +85,12 @@ def calculator():
     return render_template("cal_page.html")
 
 
+@app.route("/profile")
+@login_required
+def profile():
+    return render_template("profile.html")
+
+
 
 @app.route("/networth")
 def networth():
@@ -92,6 +101,19 @@ def networth():
 @login_required
 def dashboard():
     return render_template("dashboard.html")
+
+
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+  print(e) 
+  return render_template("404.html"), 404
+
+
+@app.errorhandler(500)
+def internal_error(e):
+    return render_template("500.html"), 500
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -116,6 +138,10 @@ def register():
             flash("Email already exists!", "danger")
             return redirect(url_for("register"))
         
+        if not re.match(r"^(?=.*[!@#$%^&*(),.?\":{}|<>])(?=.*\d)[A-Za-z\d!@#$%^&*(),.?\":{}|<>]{8,}$", password):
+            flash("Password must be at least 8 characters long, include one number and one special character.", "danger")
+            return redirect(url_for("register"))
+        
         new_user = User(name=name, email=email, mobile=mobile, gender = gender)
         new_user.set_password(password)  # Store hashed password
         db.session.add(new_user)
@@ -127,26 +153,39 @@ def register():
     return render_template("register.html")
 
 
-
+# ORIGINAL
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
     if request.method == "POST":
-        name = request.form.get("name")
+        
         email = request.form.get("email")
         password = request.form.get("password")
         
 
-        user = User.query.filter_by(email=email,name = name).first()
+        user = User.query.filter_by(email=email).first()
         if user and user.check_password(password):
             login_user(user)
             flash("Login successful!", "success")
-            return redirect(url_for("dashboard"))
+            return redirect(url_for("home"))
         else:
             flash("Invalid credentials!", "danger")
 
+            #         # Debugging: Print stored hash and entered password check result
+        # print(f"DEBUG: Stored Hash: {user.password_hash}")
+        print(f"DEBUG: Entered Password: {password}")
+        # print(f"DEBUG: Password Check Result: {user.check_password(password)}")
+
     return render_template("login.html")
+
+
+
+
+
+
+
+
 
 
 
@@ -156,7 +195,7 @@ def login():
 def logout():
     logout_user()
     flash("Logged out successfully!", "info")
-    return redirect(url_for("login"))
+    return redirect(url_for("home"))
 
 
 # @app.route("/profile")
