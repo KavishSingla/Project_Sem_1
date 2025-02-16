@@ -85,6 +85,12 @@ def calculator():
     return render_template("cal_page.html")
 
 
+@app.route("/credit")
+@login_required
+def credit():
+    return render_template("credit_cards.html")
+
+
 @app.route("/profile")
 @login_required
 def profile():

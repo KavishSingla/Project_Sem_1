@@ -243,7 +243,7 @@ nav ul li a {
                     </ul>
                   </div>
 
-                <li><a href="#">Credit Cards</a></li>
+                <li><a href="{{url_for('credit')}}">Credit Cards</a></li>
                 <li><a href="{{url_for('calculator')}}">Calculators</a></li>
 
                 <div class="dropdown ">
@@ -267,10 +267,10 @@ nav ul li a {
 
         <div class="auth-buttons sign">
             
-            <a href="{{url_for('profile')}}" class="btn" style="border: 2px solid;">  Profile</a>
+            <a href="{{url_for('profile')}}" class="btn" style="border: 2px solid;">  <i class="fa-solid fa-user icon"></i>  Profile</a>
 
           
-            <a href="{{url_for('logout')}}" class="btn" style="border: 2px solid;" onclick="return confirm('Are you sure to logout')">  Logout</a>
+            <a href="{{url_for('logout')}}" class="btn" style="border: 2px solid;" onclick="return confirm('Are you sure, you want to logout ?')"> <i class="fa-solid fa-sign-out-alt icon"></i> Logout</a>
         
             
         </div>
@@ -278,10 +278,10 @@ nav ul li a {
         {% else %}
         <div class="auth-buttons sign">
             
-            <a href="{{url_for('register')}}" class="btn" style="border: 2px solid;">Sign up</a>
+            <a href="{{url_for('register')}}" class="btn" style="border: 2px solid;"> <i class="fa-solid fa-user-plus icon"></i> Sign up</a>
 
           
-            <a href="{{url_for('login')}}" class="btn" style="border: 2px solid;">   </span> Sign In</a>
+            <a href="{{url_for('login')}}" class="btn" style="border: 2px solid;">  <i class="fa-solid fa-sign-in-alt icon"></i>  Sign In</a>
         
             
         </div>
