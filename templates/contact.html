@@ -144,6 +144,15 @@
 </head>
 
 <body>
+
+
+
+    <div class="profile-home" style="text-align: right; margin-left: 90vw; margin-top: 3vh; position: absolute;"> 
+    
+        <a href="{{url_for('home')}}" style="text-decoration: none; color: black;"><i class="fa fa-home"></i>  Home</a>
+        </div>
+    
+
     <div class="contact-container">
         <div class="contact-heading">
             <h1>Contact Us</h1>
@@ -152,7 +161,7 @@
 
         <div class="contact-box">
             <h2>Get in Touch</h2>
-            <form method="post">
+            <form action="{{url_for('contact_info')}}" method="POST">
                 <div class="form-group">
                     <label for="name">Your Name:</label>
                     <input type="text" id="name" name="name" placeholder="Enter your name" class="form-control" required>

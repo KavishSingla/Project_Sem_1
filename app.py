@@ -94,13 +94,19 @@ def credit():
 @app.route("/profile")
 @login_required
 def profile():
-    return render_template("profile.html")
+    return render_template("profile.html",user = current_user)
 
 
 
 @app.route("/networth")
 def networth():
     return render_template("networth.html")
+
+
+@app.route("/contactinfo" , methods=["POST"])
+def contact_info():
+    flash("Thanks for your feedback", "success")
+    return redirect(url_for("home"))
 
 
 @app.route("/dashboard")
@@ -178,22 +184,34 @@ def login():
         else:
             flash("Invalid credentials!", "danger")
 
-            #         # Debugging: Print stored hash and entered password check result
-        # print(f"DEBUG: Stored Hash: {user.password_hash}")
-        print(f"DEBUG: Entered Password: {password}")
-        # print(f"DEBUG: Password Check Result: {user.check_password(password)}")
-
     return render_template("login.html")
+           
 
 
 
 
+@app.route("/update/<int:id>", methods=["GET", "POST"])
+@login_required
+def update(id):
+    user = db.session.get(User, id)
+    if request.method == "POST":
+        name = request.form.get("name")
+        gender = request.form.get("gender")
+        mobile = request.form.get("mobile")
+        
 
+        user.name = name
+        user.gender = gender
+        user.mobile = mobile
+        
 
+        db.session.add(user)
+        db.session.commit()
+        flash("Profile Updated", "info")
+        return redirect(url_for("profile"))
 
-
-
-
+    return render_template("update_user.html", user = user)
+    
 
 
 @app.route("/logout")
@@ -204,26 +222,32 @@ def logout():
     return redirect(url_for("home"))
 
 
-# @app.route("/profile")
-# @login_required
-# def profile():
-#     return render_template("profile.html")
+@app.route("/delete/<int:id>")
+@login_required
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def delete(id):
+    user = db.session.get(User, id)
+    db.session.delete(user)
+    db.session.commit()
+    flash("Profile deleted successfully!", "success")
+    return redirect(url_for("home"))
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

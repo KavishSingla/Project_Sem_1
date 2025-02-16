@@ -14,8 +14,9 @@
     <style>
         body {
             margin: 0;
-            background-color: #f8f9fa;
-            background: url(./images/credit.jpeg) center/cover no-repeat;
+            background-color: rgb(249, 242, 232);
+            font-family: Arial, sans-serif;
+            /* background: url(./images/credit.jpeg) center/cover no-repeat; */
         }
 
         .card {
@@ -82,10 +83,120 @@
             color: white;
             padding: 10px 0;
         }
+
+        .box:hover {
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+
+        .navbar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 15px 30px;
+background-color: white;
+box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+margin-left: 10px;
+}
+
+nav ul {
+list-style: none;
+display: flex;
+gap: 20px;
+}
+
+nav ul li a {
+text-decoration: none;
+color: #333;
+font-size: 16px;
+}
+
+
+
+.btn-outline {
+background: transparent;
+border: 2px solid #333;
+color: #333;
+}
+
+
+.sign{
+margin-right: 50px;
+}
+
+.title{
+margin-top: 10px;
+}
     </style>
 </head>
 
 <body>
+
+
+
+    <!-- Header -->
+    <header class="navbar">
+        <div class="logo"><img src="../static/budgetbee_logo.jpg" alt="Mint Logo" width="50px" height="40px"></div>
+        <nav class="title">
+            <ul>
+                <li><a href="{{url_for('home')}}">Home </a></li>
+                <li><a href="{{url_for('aboutus')}}">About </a></li>
+
+               
+
+                <li><a href="{{url_for('credit')}}">Credit Cards</a></li>
+                <li><a href="{{url_for('calculator')}}">Calculators</a></li>
+
+                <div class="dropdown ">
+                    <button style="border: none;background-color: white;" class="dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Resources
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="{{url_for('networth')}}">Net Worth</a></li>
+                      <li><a class="dropdown-item" href="{{url_for('check_it_out')}}">Investing</a></li>
+                     
+                    </ul>
+                  </div>
+
+                  <li><a href="{{url_for('contact')}}">Contact </a></li>
+                
+            </ul>
+        </nav>
+        
+        {% if current_user.is_authenticated %}
+
+
+        <div class="auth-buttons sign">
+            
+            <a href="{{url_for('profile')}}" class="btn" style="border: 2px solid;">  <i class="fa-solid fa-user icon"></i>  Profile</a>
+
+          
+            <a href="{{url_for('logout')}}" class="btn" style="border: 2px solid;" onclick="return confirm('Are you sure, you want to logout ?')"> <i class="fa-solid fa-sign-out-alt icon"></i> Logout</a>
+        
+            
+        </div>
+
+        {% else %}
+        <div class="auth-buttons sign">
+            
+            <a href="{{url_for('register')}}" class="btn" style="border: 2px solid;"> <i class="fa-solid fa-user-plus icon"></i> Sign up</a>
+
+          
+            <a href="{{url_for('login')}}" class="btn" style="border: 2px solid;">  <i class="fa-solid fa-sign-in-alt icon"></i>  Sign In</a>
+        
+            
+        </div>
+        
+        {% endif %}
+
+    </header>
+
+
+
+
     <div class="container mt-5">
         <h2 class="text-center mb-4">Exclusive Credit Card Offers</h2>
         <br>
@@ -97,32 +208,32 @@
         </div>
         <br>
         <div class="d-flex flex-column align-items-center">
-            <div class="card mb-3">
-                <img src="card1.jpg" class="card-img-top" alt="Credit Card 1">
+            <div class="card mb-3 box">
+                <img src="../static/card1.avif" class="card-img-top" alt="Credit Card 1" style="height: 200px; width: 350px; margin-top: 1vh; margin-left: 2vh;">
                 <div class="card-body">
                     <h5 class="card-title">Platinum Rewards Card</h5>
                     <p class="card-text">Earn 5x rewards on dining and travel. Zero annual fees for the first year.</p>
                     <a href="#" class="btn btn-primary">Apply Now</a>
                 </div>
             </div>
-            <div class="card mb-3">
-                <img src="card2.jpg" class="card-img-top" alt="Credit Card 2">
+            <div class="card mb-3 box">
+                <img src="../static/card2.avif" class="card-img-top" alt="Credit Card 2" style="height: 200px; width: 350px; margin-top: 1vh; margin-left: 2vh;">
                 <div class="card-body">
                     <h5 class="card-title">Cashback Credit Card</h5>
                     <p class="card-text">Get 2% cashback on all purchases. No hidden charges.</p>
                     <a href="#" class="btn btn-primary">Apply Now</a>
                 </div>
             </div>
-            <div class="card mb-3">
-                <img src="card3.jpg" class="card-img-top" alt="Credit Card 3">
+            <div class="card mb-3 box">
+                <img src="../static/card3.avif" class="card-img-top" alt="Credit Card 3" style="height: 200px; width: 350px; margin-top: 1vh; margin-left: 2vh;">
                 <div class="card-body">
                     <h5 class="card-title">Travel Benefits Card</h5>
                     <p class="card-text">Enjoy free lounge access and travel insurance benefits worldwide.</p>
                     <a href="#" class="btn btn-primary">Apply Now</a>
                 </div>
             </div>
-            <div class="card mb-3">
-                <img src="card4.jpg" class="card-img-top" alt="Credit Card 4">
+            <div class="card mb-3 box">
+                <img src="../static/card4.avif" class="card-img-top" alt="Credit Card 4" style="height: 200px; width: 350px; margin-top: 1vh; margin-left: 2vh;">
                 <div class="card-body">
                     <h5 class="card-title">Student Credit Card</h5>
                     <p class="card-text">Low interest rates and great rewards for students.</p>
