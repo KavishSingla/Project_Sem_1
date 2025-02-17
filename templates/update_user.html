@@ -47,11 +47,16 @@
 </head>
 <body>
 
+    <div class="profile-home" style="text-align: right; margin-left: 85vw; margin-top: 3vh; position: absolute;"> 
+
+        <a href="{{url_for('profile')}}" style="text-decoration: none; color: black;"><i class="fa-solid fa-arrow-left"></i> Back</a>
+        </div>
 
     <div class="profile-home" style="text-align: right; margin-left: 90vw; margin-top: 3vh; position: absolute;"> 
     
         <a href="{{url_for('home')}}" style="text-decoration: none; color: black;"><i class="fa fa-home"></i>  Home</a>
         </div>
+
 
 
     <div class="container d-flex justify-content-center align-items-center vh-100">
@@ -97,7 +102,7 @@
                 </div>
                 <div class="mb-2">
                     <label class="form-label">Phone</label>
-                    <input type="tel" id="editPhone" class="form-control" value="{{user.mobile}}" name="mobile">
+                    <input type="tel" id="editPhone" class="form-control" value="{{user.mobile}}" name="mobile" maxlength="10"  pattern="\d{10}" >
                 </div>
                 <!-- <button class="btn btn-primary w-100" id="saveButton">Save</button> -->
                 <input type="submit" value="Save" class="btn btn-primary w-100" onclick="return confirm('Are you sure , to save the changes ?')" >

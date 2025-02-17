@@ -16,7 +16,7 @@
             margin: 0;
             background-color: rgb(249, 242, 232);
             font-family: Arial, sans-serif;
-            /* background: url(./images/credit.jpeg) center/cover no-repeat; */
+            /* background: url(../static/creditcard_back2.webp) center/cover no-repeat ; */
         }
 
         .card {
@@ -139,7 +139,7 @@ margin-top: 10px;
 
     <!-- Header -->
     <header class="navbar">
-        <div class="logo"><img src="../static/budgetbee_logo.jpg" alt="Mint Logo" width="50px" height="40px"></div>
+        <div class="logo"><img src="../static/logo_final.jpg" alt="Mint Logo" width="50px" height="40px"></div>
         <nav class="title">
             <ul>
                 <li><a href="{{url_for('home')}}">Home </a></li>
@@ -198,7 +198,7 @@ margin-top: 10px;
 
 
     <div class="container mt-5">
-        <h2 class="text-center mb-4">Exclusive Credit Card Offers</h2>
+        <h2 class="text-center mb-5">Exclusive Credit Card Offers</h2>
         <br>
         <div class="para">
             <p>We think you'll love these cards from our partners.</p>
@@ -213,7 +213,7 @@ margin-top: 10px;
                 <div class="card-body">
                     <h5 class="card-title">Platinum Rewards Card</h5>
                     <p class="card-text">Earn 5x rewards on dining and travel. Zero annual fees for the first year.</p>
-                    <a href="#" class="btn btn-primary">Apply Now</a>
+                    <a href="{{url_for('apply')}}" class="btn btn-primary" onclick="return confirm('Are You Sure , To Apply For This Card ?')">Apply Now</a>
                 </div>
             </div>
             <div class="card mb-3 box">
@@ -221,7 +221,7 @@ margin-top: 10px;
                 <div class="card-body">
                     <h5 class="card-title">Cashback Credit Card</h5>
                     <p class="card-text">Get 2% cashback on all purchases. No hidden charges.</p>
-                    <a href="#" class="btn btn-primary">Apply Now</a>
+                    <a href="{{url_for('apply')}}" class="btn btn-primary" onclick="return confirm('Are You Sure , To Apply For This Card ?')" >Apply Now</a>
                 </div>
             </div>
             <div class="card mb-3 box">
@@ -229,7 +229,7 @@ margin-top: 10px;
                 <div class="card-body">
                     <h5 class="card-title">Travel Benefits Card</h5>
                     <p class="card-text">Enjoy free lounge access and travel insurance benefits worldwide.</p>
-                    <a href="#" class="btn btn-primary">Apply Now</a>
+                    <a href="{{url_for('apply')}}" class="btn btn-primary" onclick="return confirm('Are You Sure , To Apply For This Card ?')" >Apply Now</a>
                 </div>
             </div>
             <div class="card mb-3 box">
@@ -237,7 +237,7 @@ margin-top: 10px;
                 <div class="card-body">
                     <h5 class="card-title">Student Credit Card</h5>
                     <p class="card-text">Low interest rates and great rewards for students.</p>
-                    <a href="#" class="btn btn-primary">Apply Now</a>
+                    <a href="{{url_for('apply')}}" class="btn btn-primary" onclick="return confirm('Are You Sure , To Apply For This Card ?')" >Apply Now</a>
                 </div>
             </div>
         </div>

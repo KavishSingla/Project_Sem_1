@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emi Calculator</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .header {
+            background-color: #120c5f;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .background-container {
+            background-color: #0d3500;
+            position: relative;
+            padding: 40px 20px;
+        }
+
+        .background-design {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Cpath d='M0 50 Q 25 25, 50 50 T 100 50 T 150 50' stroke='rgba(255,255,255,0.1)' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+            background-size: 200px 100px;
+        }
+
+        .content-wrapper {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .converter-title {
+            color: white;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .converter-subtitle {
+            color: #a0a0a0;
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        .converter-layout {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .container {
+            width: 100%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+        }
+        
+         .estimated-saving-balance {
+            width: 60%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        } 
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0d3500;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .info-section, .faq-section, .testimonials, .conversion-table {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            background-color: #0d3500;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+   
+        .footer-copyright {
+            background-color: black;
+            padding: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .converter-layout, .tools-container {
+                flex-direction: column;
+            }
+            .container, .estimated-saving-balance, .tool-box {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-home" style="text-align: right; margin-left: 85vw; margin-top: 3vh; position: absolute; z-index: 10;"> 
+
+        <a href="{{url_for('calculator')}}" style="text-decoration: none; color: white;"><i class="fa-solid fa-arrow-left"></i> Back</a>
+        </div>
+
+
+    <div class="profile-home" style="text-align: right; margin-left: 90vw; margin-top: 3vh; position: absolute; z-index: 10;"> 
+    
+        <a href="{{url_for('home')}}" style="text-decoration: none; color: white;"><i class="fa fa-home"></i>  Home</a>
+        </div>
+
+
+
+        
+    </header>
+
+    <section class="background-container">
+        <div class="background-design"></div>
+        <div class="content-wrapper">
+            <h1 class="converter-title">EMI Calculator</h1>
+            <p class="converter-subtitle"><b>Find out how much you can grow your savings and how long it'll take.</b></p>
+
+            <div class="converter-layout">
+                <div class="container">
+                    <div class="input-group">
+                        <label for="initial">How much is your initial deposit ?</label>
+                        <input type="number" id="initial" placeholder="0" />
+                    </div>
+
+                    <div class="input-group">
+                        <label for="years">How long do you plan to save ?</label>
+                        <input type="number" id="years" placeholder="0" />
+                    </div>
+
+                    <div class="input-group">
+                        <label for="rate">Estimated interest rate</label>
+                        <input type="number" id="rate" placeholder="0" />
+                    </div>
+                    <h3 style="font-family:sans-serif;">Estimate your savings goal</h3>
+                    <div id="result" style="margin-top: 20px; font-size: 1.2rem"></div>
+                    
+                    
+                    <button onclick="calculateSavings()">Calculate</button>
+                    <div id="result" style="margin-top: 20px; font-size: 1.2rem; color: #120c5f;"></div>
+                </div>
+
+                <div class="estimated-saving-balance">
+                    <h2 style="font-size: 35px;">Your estimated monthly EMI</h2>
+                    <div class="rate-item">
+                        <span id="emi-result" style="font-size: 35px;">$0</span>
+                    </div>
+                    <h3 style="font-size: 25px;">Total Interest Earned</h3>
+                    <div class="rate-item">
+                        <span id="total-interest" style="font-size: 25px;">$0</span>
+                    </div>
+                    <h3 style="font-size: 25px">Total Principle Invested</h3>
+                    <div class="rate-item">
+                        <span id="total-principal" style="font-size: 25px;">$0</span>
+                    </div>
+                    <!-- <button style="height:50px;width: 250px;margin-left:60px;">Start Saving</button> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    
+
+    <section class="info-section">
+        <h2>What is a EMI?</h2>
+        <p>The sum of principal amount and interest is divided by the tenure, i.e., number of months, in which the loan has to be repaid. This amount has to be paid monthly. The interest component of the EMI would be larger during the initial months and gradually reduce with each payment. The exact percentage allocated towards payment of the principal depends on the interest rate. Even though your monthly EMI payment won't change, the proportion of principal and interest components will change with time. With each successive payment, you'll pay more towards the principal and less in interest.</p>
+    </section>
+
+    <section class="faq-section">
+        <h2>Floating rate EMI calculation</h2>
+        We suggest that you calculate floating / variable rate EMI by taking into consideration two opposite scenarios, i.e., optimistic (deflationary) and pessimistic (inflationary) scenario. Loan amount and loan tenure, two components required to calculate the EMI are under your control; i.e., you are going to decide how much loan you have to borrow and how long your loan tenure should be. But interest rate is decided by the banks & HFCs based on rates and policies set by RBI. As a borrower, you should consider the two extreme possibilities of increase and decrease in the rate of interest and calculate your EMI under these two conditions. Such calculation will help you decide how much EMI is affordable, how long your loan tenure should be and how much you should borrow.
+    </section>
+
+    <section class="testimonials">
+        <h2>How to use Moneyfy EMI calculator?</h2>
+            <p>
+                    The Monefy EMI calculator is user-friendly and can help you calculate your EMI instantly. Here’s how:<br>
+                
+                1. Enter the principal amount and slide the respective bars to specify the interest rate and the tenure (months or years).<br>
+                
+                2. The estimated EMI will be displayed on your screen.</p>
+    </section>
+
+    <footer>
+        <div class="footer-copyright">
+            &copy; 2025 EMI calculator. All rights reserved.
+        </div>
+    </footer>
+   
+
+    <script>
+        function calculateSavings() {
+            // Get user inputs
+            const principal = parseFloat(document.getElementById('initial').value);
+            const years = parseFloat(document.getElementById('years').value);
+            const annualRate = parseFloat(document.getElementById('rate').value);
+
+            // Validate inputs
+            if (isNaN(principal) || isNaN(years) || isNaN(annualRate) || principal <= 0 || years <= 0 || annualRate <= 0) {
+                alert("Please enter valid values for all fields.");
+                return;
+            }
+
+            // Convert annual rate to monthly and years to months
+            const monthlyRate = annualRate / 100 / 12;
+            const numberOfMonths = years * 12;
+
+            // Calculate EMI using the formula
+            const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, numberOfMonths)) / (Math.pow(1 + monthlyRate, numberOfMonths) - 1);
+            const totalPayment = emi * numberOfMonths;
+            const totalInterest = totalPayment - principal;
+
+            // Update the results in the UI
+            document.getElementById('emi-result').innerText = `$${emi.toFixed(2)}`;
+            document.getElementById('total-interest').innerText = `$${totalInterest.toFixed(2)}`;
+            document.getElementById('total-principal').innerText = `$${principal.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

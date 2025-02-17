@@ -102,7 +102,7 @@ border-top: 1px solid #ccc;
 
 
   <header class="navbar">
-    <div class="logo"><img src="../static/budgetbee_logo.jpg" alt="Mint Logo" width="50px" height="10px"></div>
+    <div class="logo"><img src="../static/logo_final.jpg" alt="Mint Logo" width="50px" height="10px"></div>
     <nav class="title">
         <ul>
           <li><a href="{{url_for('home')}}">Home </a></li>
@@ -191,11 +191,11 @@ border-top: 1px solid #ccc;
   <div class="container mx-auto px-4 py-4">
    <nav class="text-sm text-gray-600">
     <a class="text-green-600 hover:underline" style="margin-left: 80px; font-size: 20px;" href="#">
-     Home 
+      
     </a>
-    /
+    
     <a class="text-green-600 hover:underline" style="font-size: 20px;" href="#">
-     Calculators
+    
     </a>
     
     <!-- <span>
@@ -214,12 +214,12 @@ border-top: 1px solid #ccc;
       <img alt="Dollar sign on a document" class="w-12 h-12" height="50" src="https://storage.googleapis.com/a1aa/image/IOfOcQWVjqe1aELdoA440Xs9gV_J7CPIthPpJmsptLA.jpg" width="50"/>
       <div>
        <h2 class="text-lg font-bold text-green-600">
-        <a href="#">
-         401(k) Calculator
+        <a href="{{url_for('emi')}}">
+        EMI Calculator
         </a>
        </h2>
        <p>
-        Estimate how much you could have in your 401(k) account by the time you retire.
+        Estimate how much you could have in your account by the time you retire.
        </p>
       </div>
      </div>
@@ -228,8 +228,8 @@ border-top: 1px solid #ccc;
       <img alt="Stack of dollar bills" class="w-12 h-12" height="50" src="https://storage.googleapis.com/a1aa/image/dk8IlSyEjjkgeC6bBX5HiKnC5nIuEt3fD9VqGevG5Yg.jpg" width="50"/>
       <div>
        <h2 class="text-lg font-bold text-green-600">
-        <a href="#">
-         Budget Calculator
+        <a href="{{url_for('fd')}}">
+         FD Calculator
         </a>
        </h2>
        <p>
@@ -242,8 +242,8 @@ border-top: 1px solid #ccc;
       <img alt="Percentage sign on a document" class="w-12 h-12" height="50" src="https://storage.googleapis.com/a1aa/image/nPtekE2fkU-P4NaJmhriikYIbefGdoAUUSvlDVXwGzs.jpg" width="50"/>
       <div>
        <h2 class="text-lg font-bold text-green-600">
-        <a href="#">
-         Compound Interest Calculator
+        <a href="{{url_for('rd')}}">
+         RD Calculator
         </a>
        </h2>
        <p>
@@ -256,8 +256,8 @@ border-top: 1px solid #ccc;
       <img alt="Dollar sign with circular arrows" class="w-12 h-12" height="50" src="https://storage.googleapis.com/a1aa/image/34Qztx3fYnNsWhH_KfyJWjJwSfovtLKpPteEdhy7yQw.jpg" width="50"/>
       <div>
        <h2 class="text-lg font-bold text-green-600">
-        <a href="#">
-         Inflation Calculator
+        <a href="{{url_for('savings')}}">
+         Savings Calculator
         </a>
        </h2>
        <p>
@@ -270,8 +270,8 @@ border-top: 1px solid #ccc;
       <img alt="Dollar sign on a green circle" class="w-12 h-12" height="50" src="https://storage.googleapis.com/a1aa/image/Hc6JUg3QNPlb8sYJ8CRMuJiwQa3SmRdHf3dwexDptj8.jpg" width="50"/>
       <div>
        <h2 class="text-lg font-bold text-green-600">
-        <a href="#">
-         Retirement Calculator
+        <a href="{{url_for('sip')}}">
+         SIP Calculator
         </a>
        </h2>
        <p>
@@ -279,7 +279,7 @@ border-top: 1px solid #ccc;
        </p>
       </div>
      </div>
-     <!-- ROI Calculator -->
+     <!-- ROI Calculator
      <div class="flex items-start space-x-4">
       <img alt="Graph with percentage sign" class="w-12 h-12" height="50" src="https://storage.googleapis.com/a1aa/image/8iqkRtXo7Ip4Zip1450J3kZ8GiKEtpxGJQTAT_wQcZg.jpg" width="50"/>
       <div>
@@ -292,7 +292,7 @@ border-top: 1px solid #ccc;
         Estimate the gain or loss on an investment using this return on investment (ROI) calculator.
        </p>
       </div>
-     </div>
+     </div> -->
     </div>
    </div>
  

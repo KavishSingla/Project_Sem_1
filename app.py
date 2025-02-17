@@ -91,6 +91,39 @@ def credit():
     return render_template("credit_cards.html")
 
 
+@app.route("/emi")
+@login_required
+def emi():
+    return render_template("emiCalculator.html")
+
+
+
+@app.route("/fd")
+@login_required
+def fd():
+    return render_template("fdCalculator.html")
+
+
+
+@app.route("/rd")
+@login_required
+def rd():
+    return render_template("rdCalculator.html")
+
+
+@app.route("/savings")
+@login_required
+def savings():
+    return render_template("savingscalculator.html")
+
+
+
+@app.route("/sip")
+@login_required
+def sip():
+    return render_template("sipCalculator.html")
+
+
 @app.route("/profile")
 @login_required
 def profile():
@@ -109,11 +142,17 @@ def contact_info():
     return redirect(url_for("home"))
 
 
-@app.route("/dashboard")
-@login_required
-def dashboard():
-    return render_template("dashboard.html")
+# @app.route("/dashboard")
+# @login_required
+# def dashboard():
+#     return render_template("dashboard.html")
 
+
+@app.route("/apply")
+@login_required
+def apply():
+    flash("Thanks for applying the card , details will be shared on your email ", "info")
+    return redirect(url_for("home"))
 
 
 
