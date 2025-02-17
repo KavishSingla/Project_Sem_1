@@ -142,12 +142,6 @@ def contact_info():
     return redirect(url_for("home"))
 
 
-# @app.route("/dashboard")
-# @login_required
-# def dashboard():
-#     return render_template("dashboard.html")
-
-
 @app.route("/apply")
 @login_required
 def apply():
@@ -211,11 +205,12 @@ def login():
 
     if request.method == "POST":
         
+        name = request.form.get("name")
         email = request.form.get("email")
         password = request.form.get("password")
         
 
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter_by(email=email , name = name).first()
         if user and user.check_password(password):
             login_user(user)
             flash("Login successful!", "success")
