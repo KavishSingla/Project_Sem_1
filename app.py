@@ -49,11 +49,11 @@ class User(db.Model, UserMixin):
         return bcrypt.check_password_hash(self.password_hash, password)
     
 
-    
-    
 @login_manager.user_loader
 def load_user(user_id):
-    return db.session.get(User, int(user_id))
+    return db.session.get(User, int(user_id))    
+    
+
 
 
 with app.app_context():
@@ -173,12 +173,12 @@ def register():
         gender = request.form.get("gender")
         
 
-        # Check if passwords match
+      
         if password != confirm_password:
             flash("Passwords do not match!", "danger")
             return redirect(url_for("register"))
 
-        # Check if the email already exists
+       
         if User.query.filter_by(email=email).first():
             flash("Email already exists!", "danger")
             return redirect(url_for("register"))
@@ -188,7 +188,7 @@ def register():
             return redirect(url_for("register"))
         
         new_user = User(name=name, email=email, mobile=mobile, gender = gender)
-        new_user.set_password(password)  # Store hashed password
+        new_user.set_password(password) 
         db.session.add(new_user)
         db.session.commit()
 
@@ -198,7 +198,7 @@ def register():
     return render_template("register.html")
 
 
-# ORIGINAL
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -269,19 +269,3 @@ def delete(id):
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
