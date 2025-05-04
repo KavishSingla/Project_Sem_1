@@ -141,10 +141,7 @@
         <div class="box1">
             <h2 class="mb-4">Log In to your existing Account</h2> <br><br>
             <form action="{{url_for('login')}}" method="POST" >
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter your name" name="name" required>
-                </div>
+                
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" placeholder="Enter your email" name="email" required>
@@ -152,6 +149,15 @@
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="role">Select Role:</label>
+                    <select name="role" id="role" class="form-control" required>
+                        <option value="">Choose Role</option>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
                 </div>
                
                 

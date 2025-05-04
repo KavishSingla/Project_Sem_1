@@ -1,10 +1,14 @@
-from flask import Flask, render_template, redirect, request, url_for, flash
+from flask import Flask, render_template, redirect, request, url_for, flash , jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask_bcrypt import Bcrypt
 from functools import wraps
 import re
+from flask_jwt_extended import JWTManager, create_access_token
+
+
+
 
 
 
@@ -18,8 +22,9 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + \
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 app.config["SECRET_KEY"] = "Your secret key"
+app.config['JWT_SECRET_KEY'] = 'your_jwt_secret_key'
 
-
+jwt = JWTManager(app)
 db = SQLAlchemy(app)
 
 bcrypt = Bcrypt(app)
@@ -40,7 +45,8 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(100), nullable=False)
     mobile = db.Column(db.String(15), nullable=False)
     gender = db.Column(db.String(50), nullable=False)
-    
+    role = db.Column(db.String(50), nullable=False, default="user")
+
 
     def set_password(self, password):
         self.password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
@@ -58,6 +64,17 @@ def load_user(user_id):
 
 with app.app_context():
     db.create_all()
+
+
+
+    if not User.query.filter_by(role="admin").first():
+            admin_user = User(name="Admin", email="admin@gmail.com",mobile="1234567890",gender='Male', role="admin")
+            admin_user.set_password("admin123")  # Set a default password
+            db.session.add(admin_user)
+            db.session.commit()
+            print("Admin user created with email: admin@gmail.com and password: admin123")
+
+
 
 
 @app.route("/")
@@ -205,12 +222,13 @@ def login():
 
     if request.method == "POST":
         
-        name = request.form.get("name")
+        
         email = request.form.get("email")
         password = request.form.get("password")
+        role = request.form.get("role")
         
 
-        user = User.query.filter_by(email=email , name = name).first()
+        user = User.query.filter_by(email=email , role = role).first()
         if user and user.check_password(password):
             login_user(user)
             flash("Login successful!", "success")
@@ -221,7 +239,14 @@ def login():
     return render_template("login.html")
            
 
-
+def admin_required(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if current_user.role != 'admin':
+            flash("Access denied!", "danger")
+            return redirect(url_for('dashboard'))
+        return func(*args, **kwargs)
+    return wrapper
 
 
 @app.route("/update/<int:id>", methods=["GET", "POST"])
@@ -265,6 +290,91 @@ def delete(id):
     db.session.commit()
     flash("Profile deleted successfully!", "success")
     return redirect(url_for("home"))
+
+
+
+# @app.route('/registerapi', methods=['POST'])
+# def register_api():
+#     data = request.get_json()
+#     name = data.get('name')
+#     email = data.get('email')
+#     password = data.get('password')
+#     mobile = data.get('mobile')
+#     gender = data.get('gender')
+
+#     if User.query.filter_by(email=email).first():
+#         return jsonify({'message': 'Email already exists'}), 409
+
+#     new_user = User(name=name, email=email, mobile=mobile, gender=gender)
+#     new_user.set_password(password)
+#     db.session.add(new_user)
+#     db.session.commit()
+
+#     return jsonify({'message': 'User registered successfully'}), 201
+
+
+# @app.route('/loginapi', methods=['POST'])
+# def login_api():
+#     data = request.get_json()
+#     email = data.get('email')
+#     password = data.get('password')
+
+#     user = User.query.filter_by(email=email).first()
+#     if user and user.check_password(password):
+#         token = create_access_token(identity=user.id)
+#         return jsonify({'token': token}), 200
+#     else:
+#         return jsonify({'message': 'Invalid credentials'}), 401
+
+
+@app.route("/registerapi", methods=["POST"])
+def register_api():
+    data = request.get_json(force=True, silent=True) or {}
+
+    name = data.get("name")
+    email = data.get("email")
+    password = data.get("password")
+    mobile = data.get("mobile")
+    gender = data.get("gender")
+
+    if not all([name, email, password, mobile, gender]):
+        return jsonify({"error": "All fields are required"}), 400
+
+    if User.query.filter_by(email=email).first():
+        return jsonify({"error": "Email already exists"}), 400
+
+    new_user = User(name=name, email=email, mobile=mobile, gender=gender)
+    new_user.set_password(password)
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify({"message": "Registration successful!"}), 200
+
+
+
+@app.route("/loginapi", methods=["POST"])
+def login_api():
+    data = request.get_json()
+
+    email = data.get("email")
+    password = data.get("password")
+    role = data.get("role")
+
+    if not all([email, password, role]):
+        return jsonify({"error": "Email, password, and role are required"}), 400
+
+    user = User.query.filter_by(email=email, role=role).first()
+    if user and user.check_password(password):
+        access_token = create_access_token(identity={"id": user.id, "email": user.email, "role": user.role})
+        return jsonify({
+            "access_token": access_token,
+            "message": "Login successful"
+        }), 200
+    else:
+        return jsonify({"error": "Invalid credentials"}), 401
+
+
+
 
 
 if __name__ == "__main__":
