@@ -87,14 +87,14 @@ def check_it_out():
     return render_template("investing.html")
 
 
-@app.route("/contact")
-def contact():
-    return render_template("contact.html")
+# @app.route("/contact")
+# def contact():
+#     return render_template("contact.html")
 
 
-@app.route("/aboutus")
-def aboutus():
-    return render_template("about.html")
+# @app.route("/aboutus")
+# def aboutus():
+#     return render_template("about.html")
 
 @app.route("/calculator")
 @login_required
@@ -293,85 +293,95 @@ def delete(id):
 
 
 
-# @app.route('/registerapi', methods=['POST'])
+
+@app.route("/contact" , methods=['GET'])
+def contact():
+    contact_info = {
+        "company_name": "BudgetBee",
+        "address": "Chitkara University, Rajpura",
+        "phone": "1234567890",
+        "email": "BudgetBee@gmail.com",
+        "support_email": "support@BudgetBee.com",
+        "working_hours": "Monday to Friday, 9 AM - 6 PM",
+        "social_media": {
+            "facebook": "#",
+            "twitter": "#",
+            "instagram": "#"
+        }
+    }
+    return jsonify(contact_info)
+
+
+
+
+
+@app.route("/aboutus" , methods=['GET'])
+def aboutus():
+    about_info = {
+        "application_name": "BudgetBee",
+        "description": "Making progress is hard work. That’s why we believe in a world where technology and data can help make finances easier for everyone. It’s our mission to empower each and every one of our members with the knowledge, tips and tools they need to turn their financial dreams into a reality ",
+        "mission": "we believe that managing personal finances should be effortless and empowering. Our smart finance tracker is designed to help you take control of your money, track your expenses, set budgets, and achieve your financial goals all in one place.",
+        "vision": " We know that financial planning can be overwhelming, but with BudgetBee’s intuitive tools, you can visualize your spending, monitor savings, and make informed financial decisions with ease. Whether you’re a student, a working professional, or managing a household, our platform adapts to your needs.",
+        "goals": [
+            "Security and simplicity are at the heart of BudgetBee. Your data is protected with bank-level encryption, and our user-friendly interface ensures that budgeting becomes a habit—not a hassle. With insightful analytics, reminders, and custom financial goals, BudgetBee helps you spend wisely and save smarter.",
+            "Take the first step toward financial freedom today! Join thousands of users who trust BudgetBee to track their expenses, cut unnecessary costs, and build a stable financial future. Because when it comes to money every small step counts.",
+            
+        ],
+        "contact": {
+            "email": "BudgetBee@gmail.com",
+            "phone": "1234567890"
+        }
+    }
+    return jsonify(about_info)
+
+
+
+
+# @app.route("/registerapi", methods=["POST"])
 # def register_api():
-#     data = request.get_json()
-#     name = data.get('name')
-#     email = data.get('email')
-#     password = data.get('password')
-#     mobile = data.get('mobile')
-#     gender = data.get('gender')
+#     data = request.get_json(force=True, silent=True) or {}
+
+#     name = data.get("name")
+#     email = data.get("email")
+#     password = data.get("password")
+#     mobile = data.get("mobile")
+#     gender = data.get("gender")
+
+#     if not all([name, email, password, mobile, gender]):
+#         return jsonify({"error": "All fields are required"}), 400
 
 #     if User.query.filter_by(email=email).first():
-#         return jsonify({'message': 'Email already exists'}), 409
+#         return jsonify({"error": "Email already exists"}), 400
 
 #     new_user = User(name=name, email=email, mobile=mobile, gender=gender)
 #     new_user.set_password(password)
 #     db.session.add(new_user)
 #     db.session.commit()
 
-#     return jsonify({'message': 'User registered successfully'}), 201
+#     return jsonify({"message": "Registration successful!"}), 200
 
 
-# @app.route('/loginapi', methods=['POST'])
+
+# @app.route("/loginapi", methods=["POST"])
 # def login_api():
 #     data = request.get_json()
-#     email = data.get('email')
-#     password = data.get('password')
 
-#     user = User.query.filter_by(email=email).first()
+#     email = data.get("email")
+#     password = data.get("password")
+#     role = data.get("role")
+
+#     if not all([email, password, role]):
+#         return jsonify({"error": "Email, password, and role are required"}), 400
+
+#     user = User.query.filter_by(email=email, role=role).first()
 #     if user and user.check_password(password):
-#         token = create_access_token(identity=user.id)
-#         return jsonify({'token': token}), 200
+#         access_token = create_access_token(identity={"id": user.id, "email": user.email, "role": user.role})
+#         return jsonify({
+#             "access_token": access_token,
+#             "message": "Login successful"
+#         }), 200
 #     else:
-#         return jsonify({'message': 'Invalid credentials'}), 401
-
-
-@app.route("/registerapi", methods=["POST"])
-def register_api():
-    data = request.get_json(force=True, silent=True) or {}
-
-    name = data.get("name")
-    email = data.get("email")
-    password = data.get("password")
-    mobile = data.get("mobile")
-    gender = data.get("gender")
-
-    if not all([name, email, password, mobile, gender]):
-        return jsonify({"error": "All fields are required"}), 400
-
-    if User.query.filter_by(email=email).first():
-        return jsonify({"error": "Email already exists"}), 400
-
-    new_user = User(name=name, email=email, mobile=mobile, gender=gender)
-    new_user.set_password(password)
-    db.session.add(new_user)
-    db.session.commit()
-
-    return jsonify({"message": "Registration successful!"}), 200
-
-
-
-@app.route("/loginapi", methods=["POST"])
-def login_api():
-    data = request.get_json()
-
-    email = data.get("email")
-    password = data.get("password")
-    role = data.get("role")
-
-    if not all([email, password, role]):
-        return jsonify({"error": "Email, password, and role are required"}), 400
-
-    user = User.query.filter_by(email=email, role=role).first()
-    if user and user.check_password(password):
-        access_token = create_access_token(identity={"id": user.id, "email": user.email, "role": user.role})
-        return jsonify({
-            "access_token": access_token,
-            "message": "Login successful"
-        }), 200
-    else:
-        return jsonify({"error": "Invalid credentials"}), 401
+#         return jsonify({"error": "Invalid credentials"}), 401
 
 
 
