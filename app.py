@@ -55,6 +55,21 @@ class User(db.Model, UserMixin):
         return bcrypt.check_password_hash(self.password_hash, password)
     
 
+
+class Contact(db.Model):
+    __tablename__ = "contact"
+
+    contactid = db.Column(db.Integer, primary_key=True)
+    name_contact = db.Column(db.String(100), nullable=False)
+    email_contact = db.Column(db.String(100), nullable=False, unique=True)
+    msg = db.Column(db.String(100), nullable=False)
+
+
+    def __repr__(self):
+        return f"ContactId: {self.contactid} Msg: {self.msg}"
+    
+    
+
 @login_manager.user_loader
 def load_user(user_id):
     return db.session.get(User, int(user_id))    
@@ -294,22 +309,19 @@ def delete(id):
 
 
 
-@app.route("/contact" , methods=['GET'])
-def contact():
-    contact_info = {
-        "company_name": "BudgetBee",
-        "address": "Chitkara University, Rajpura",
-        "phone": "1234567890",
-        "email": "BudgetBee@gmail.com",
-        "support_email": "support@BudgetBee.com",
-        "working_hours": "Monday to Friday, 9 AM - 6 PM",
-        "social_media": {
-            "facebook": "#",
-            "twitter": "#",
-            "instagram": "#"
-        }
-    }
-    return jsonify(contact_info)
+# @app.route("/contact" , methods=["GET" , "POST"])
+# def contact():
+#     if request.method == "POST":
+#         name_contact = request.form.get("name")
+#         email_contact = request.form.get("email")
+#         msg = request.form.get("msg")
+#         new_msg = Contact(msg = msg , name = name_contact , email = email_contact )
+#         db.session.add(new_msg)
+#         db.session.commit()
+#         flash("Message sent successfully!", "success")
+#         return redirect(url_for("home"))
+#     return render_template("contact.html")
+
 
 
 
@@ -333,6 +345,39 @@ def aboutus():
         }
     }
     return jsonify(about_info)
+
+
+@app.route("/contactapi" , methods=[ "POST"])
+def contact_api():
+    data = request.get_json(force=True, silent=True) or {}
+    name_contact = data.get("name_contact")
+    email_contact = data.get("email_contact")
+    msg = data.get("msg")
+    if not msg:
+        return jsonify({"error": "message is required"}), 400
+
+    if Contact.query.filter_by(email_contact=email_contact).first():
+        return jsonify({"error": "Email already exists"}), 400
+        
+    new_msg = Contact( name_contact = name_contact , email_contact = email_contact , msg = msg )
+    db.session.add(new_msg)
+    db.session.commit()
+    return jsonify({"message": "Message Sent successful!"}), 200
+
+
+@app.route('/allcontactsapi', methods=['GET'])
+def get_all_contacts():
+    contacts = Contact.query.all()
+    data = [
+        {
+            'id': contact.contactid,
+            'name_contact': contact.name_contact,
+            'email_contact': contact.email_contact,
+            'msg': contact.msg
+        }
+        for contact in contacts
+    ]
+    return jsonify(data), 200
 
 
 
